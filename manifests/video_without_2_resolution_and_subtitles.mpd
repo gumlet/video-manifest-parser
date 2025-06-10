@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" profiles="urn:mpeg:dash:profile:isoff-on-demand:2011" minBufferTime="PT2S" type="static" mediaPresentationDuration="PT341.833344S">
+  <Period id="0">
+    <AdaptationSet id="0" contentType="video" maxWidth="1920" maxHeight="1080" frameRate="15360/512" subsegmentAlignment="true" par="16:9">
+      <SupplementalProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="1"/>
+      <Representation id="0" bandwidth="763030" codecs="avc1.4d401e" mimeType="video/mp4" sar="1:1" width="640" height="360">
+        <BaseURL>68416f5bed94500acc314c56_0_360p.mp4?token=3982aa3322702e9822bd1e137eb3bdc23a538c77&amp;expires=1751714388</BaseURL>
+        <SegmentBase indexRange="895-1958" timescale="15360" presentationTimeOffset="506">
+          <Initialization range="0-894"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="1" bandwidth="4036390" codecs="avc1.4d4028" mimeType="video/mp4" sar="1:1" width="1920" height="1080">
+        <BaseURL>68416f5bed94500acc314c56_0_1080p.mp4?token=31950f8272372b744039871ed01c2c0c4df567b6&amp;expires=1751714388</BaseURL>
+        <SegmentBase indexRange="896-1959" timescale="15360" presentationTimeOffset="506">
+          <Initialization range="0-895"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="1" contentType="audio" lang="en" subsegmentStartsWithSAP="1" subsegmentAlignment="true">
+      <Representation id="2" bandwidth="196089" codecs="mp4a.40.2" mimeType="audio/mp4" audioSamplingRate="44100">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <BaseURL>68416f5bed94500acc314c56_0_en_192k.mp4?token=7088fe8bef3c0d2b1cc0d7eae6bcf5c21cd51cbd&amp;expires=1751714388</BaseURL>
+        <SegmentBase indexRange="823-1886" timescale="44100" presentationTimeOffset="1452">
+          <Initialization range="0-822"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>

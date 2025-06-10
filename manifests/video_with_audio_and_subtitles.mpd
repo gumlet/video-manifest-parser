@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" profiles="urn:mpeg:dash:profile:isoff-on-demand:2011" minBufferTime="PT2S" type="static" mediaPresentationDuration="PT341.833344S">
+  <Period id="0">
+    <AdaptationSet id="0" contentType="video" maxWidth="1920" maxHeight="1080" frameRate="15360/512" subsegmentAlignment="true" par="16:9">
+      <SupplementalProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="1"/>
+      <Representation id="0" bandwidth="763030" codecs="avc1.4d401e" mimeType="video/mp4" sar="1:1" width="640" height="360">
+        <BaseURL>68416e832ea48d13d4497276_0_360p.mp4?token=29eb81bb95c1403fcb9bc3611fa0c59ab5021f6e&amp;expires=1751713600</BaseURL>
+        <SegmentBase indexRange="895-1958" timescale="15360" presentationTimeOffset="506">
+          <Initialization range="0-894"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="1" bandwidth="1145026" codecs="avc1.4d401f" mimeType="video/mp4" sar="1:1" width="854" height="480">
+        <BaseURL>68416e832ea48d13d4497276_0_480p.mp4?token=b3da1e38879c62c3841c145fc5ec9630029a8d80&amp;expires=1751713600</BaseURL>
+        <SegmentBase indexRange="895-1958" timescale="15360" presentationTimeOffset="506">
+          <Initialization range="0-894"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="2" bandwidth="2087302" codecs="avc1.4d401f" mimeType="video/mp4" sar="1:1" width="1280" height="720">
+        <BaseURL>68416e832ea48d13d4497276_0_720p.mp4?token=9a72b070159f71896dd1017f840e2f53cc8b08d9&amp;expires=1751713600</BaseURL>
+        <SegmentBase indexRange="896-1959" timescale="15360" presentationTimeOffset="506">
+          <Initialization range="0-895"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="3" bandwidth="4036390" codecs="avc1.4d4028" mimeType="video/mp4" sar="1:1" width="1920" height="1080">
+        <BaseURL>68416e832ea48d13d4497276_0_1080p.mp4?token=902bb4cbfab0410a246f95e603245f537c0894ca&amp;expires=1751713600</BaseURL>
+        <SegmentBase indexRange="896-1959" timescale="15360" presentationTimeOffset="506">
+          <Initialization range="0-895"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="1" contentType="audio" lang="en" subsegmentStartsWithSAP="1" subsegmentAlignment="true">
+      <Representation id="4" bandwidth="196089" codecs="mp4a.40.2" mimeType="audio/mp4" audioSamplingRate="44100">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <BaseURL>68416e832ea48d13d4497276_0_en_192k.mp4?token=363cf22770047b8cd87e4c043631150314009159&amp;expires=1751713600</BaseURL>
+        <SegmentBase indexRange="823-1886" timescale="44100" presentationTimeOffset="1452">
+          <Initialization range="0-822"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="2" contentType="text" lang="en" subsegmentAlignment="true">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="subtitle"/>
+      <Representation id="5" bandwidth="174" mimeType="text/vtt">
+        <SegmentList timescale="1000" presentationTimeOffset="32">
+          <SegmentURL media="68416e832ea48d13d4497276_0_en.vtt"/>
+        </SegmentList>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet id="3" contentType="text" lang="hi" subsegmentAlignment="true">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="subtitle"/>
+      <Representation id="6" bandwidth="278" mimeType="text/vtt">
+        <SegmentList timescale="1000" presentationTimeOffset="32">
+          <SegmentURL media="68416e832ea48d13d4497276_1_hi.vtt"/>
+        </SegmentList>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>

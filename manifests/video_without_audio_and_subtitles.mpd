@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" profiles="urn:mpeg:dash:profile:isoff-on-demand:2011" minBufferTime="PT2S" type="static" mediaPresentationDuration="PT341.833344S">
+  <Period id="0">
+    <AdaptationSet id="0" contentType="video" maxWidth="1920" maxHeight="1080" frameRate="15360/512" subsegmentAlignment="true" par="16:9">
+      <SupplementalProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="1"/>
+      <Representation id="0" bandwidth="746814" codecs="avc1.4d401e" mimeType="video/mp4" sar="1:1" width="640" height="360">
+        <BaseURL>68416f1aed94500acc3148f1_0_360p.mp4?token=1469ede47e489353815a6b5cdb06ddb3ed7eb674&amp;expires=1751713661</BaseURL>
+        <SegmentBase indexRange="895-1958" timescale="15360">
+          <Initialization range="0-894"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="1" bandwidth="1118680" codecs="avc1.4d401f" mimeType="video/mp4" sar="1:1" width="854" height="480">
+        <BaseURL>68416f1aed94500acc3148f1_0_480p.mp4?token=ae721fed592a68bab603bfbd31d82fbe79845f56&amp;expires=1751713661</BaseURL>
+        <SegmentBase indexRange="895-1958" timescale="15360">
+          <Initialization range="0-894"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="2" bandwidth="2057284" codecs="avc1.4d401f" mimeType="video/mp4" sar="1:1" width="1280" height="720">
+        <BaseURL>68416f1aed94500acc3148f1_0_720p.mp4?token=8e5e2ca343ca1f279ea6e364395b5df6c1d50be9&amp;expires=1751713661</BaseURL>
+        <SegmentBase indexRange="896-1959" timescale="15360">
+          <Initialization range="0-895"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="3" bandwidth="3862418" codecs="avc1.4d4028" mimeType="video/mp4" sar="1:1" width="1920" height="1080">
+        <BaseURL>68416f1aed94500acc3148f1_0_1080p.mp4?token=cf57334d93bb422d131d815aecde8099fe059c6f&amp;expires=1751713661</BaseURL>
+        <SegmentBase indexRange="896-1959" timescale="15360">
+          <Initialization range="0-895"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
