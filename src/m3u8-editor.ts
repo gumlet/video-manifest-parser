@@ -20,20 +20,6 @@ interface Media {
 }
 
 /**
- * Represents stream information in M3U8 playlist
- */
-interface StreamInfo {
-  bandwidth: number;
-  codecs: string;
-  resolution?: { width: number; height: number };
-  frameRate?: string;
-  videoRange?: string;
-  audio?: string;
-  subtitles?: string;
-  closedCaptions?: string;
-}
-
-/**
  * Represents media groups in M3U8 playlist
  */
 interface MediaGroups {
@@ -53,6 +39,18 @@ interface IFrameStream {
   resolution: { width: number; height: number };
   videoRange?: string;
   uri: string;
+  internalId?: string; // Internal ID for tracking
+}
+
+/**
+ * Represents a list of uris in M3U8 playlist
+ */
+interface UriList {
+  audio: string[];
+  subtitles: string[];
+  closedCaptions: string[];
+  video: string[];
+  iframe: string[];
 }
 
 /**
@@ -113,10 +111,11 @@ export class M3U8Editor {
       iFrameStreams.push({
         bandwidth: parseInt(params.BANDWIDTH),
         averageBandwidth: parseInt(params['AVERAGE-BANDWIDTH']),
-        codecs: params.CODECS,
+        codecs: params.CODECS.replace(/"/g, ''), // Remove quotes from CODECS
         resolution: { width, height },
         videoRange: params['VIDEO-RANGE'],
-        uri: params.URI.replace(/"/g, '') // Remove quotes from URI
+        uri: params.URI.replace(/"/g, ''), // Remove quotes from URI
+        internalId: `${params.CODECS.replace(/"/g, '')}_${width}x${height}` // Optional internal ID
       });
     });
 
@@ -159,6 +158,21 @@ export class M3U8Editor {
     this.initializeMediaGroup('CLOSED-CAPTIONS', this.mediaGroups.closedCaptions);
     // Parse I-Frame streams
     this.mediaGroups.iFrameStreams = this.parseIFrameStreams();
+  }
+
+  /**
+   * Get all media URIs from the manifest
+   * @returns Object containing arrays of URIs for audio, subtitles, closed captions, video, and iframe
+   */
+  getMediaUris(): UriList {
+    const uris: UriList = {
+      audio: this.mediaGroups.audio.map(media => media.uri),
+      subtitles: this.mediaGroups.subtitles.map(media => media.uri),
+      closedCaptions: this.mediaGroups.closedCaptions.map(media => media.uri),
+      video: this.manifest.playlists.map((playlist: any) => playlist.uri),
+      iframe: this.mediaGroups.iFrameStreams.map(stream => stream.uri)
+    };
+    return uris;
   }
 
   /**
@@ -260,6 +274,39 @@ export class M3U8Editor {
   }
 
   /**
+   * Remove video rendition by uri
+   * @param uri URI of the video rendition to remove
+   */
+  removeVideoRendition(uri: string): void {
+    const removeIndex = this.manifest.playlists.findIndex((playlist: { uri: string }) => playlist.uri === uri);
+    if (removeIndex !== -1) {
+      this.mediaGroups.iFrameStreams = this.mediaGroups.iFrameStreams.filter(
+        (stream) => stream.internalId !== `${this.manifest.playlists[removeIndex].attributes.CODECS.split(',')[0]}_${this.manifest.playlists[removeIndex].attributes.RESOLUTION.width}x${this.manifest.playlists[removeIndex].attributes.RESOLUTION.height}`
+      );
+      this.manifest.playlists.splice(removeIndex, 1);
+    }
+  }
+
+  /**
+   * Remove any track by uri
+   * @param uri URI of the video rendition to remove
+   */
+  removeTrackByUri(uri: string): void {
+    const uriList = this.getMediaUris();
+    if (uriList.audio.includes(uri)) {
+      this.mediaGroups.audio = this.mediaGroups.audio.filter(media => media.uri !== uri);
+    } else if (uriList.subtitles.includes(uri)) {
+      this.mediaGroups.subtitles = this.mediaGroups.subtitles.filter(media => media.uri !== uri);
+    } else if (uriList.closedCaptions.includes(uri)) {
+      this.mediaGroups.closedCaptions = this.mediaGroups.closedCaptions.filter(media => media.uri !== uri);
+    } else if (uriList.video.includes(uri)) {
+      this.removeVideoRendition(uri);
+    } else if (uriList.iframe.includes(uri)) {
+      this.mediaGroups.iFrameStreams = this.mediaGroups.iFrameStreams.filter(stream => stream.uri !== uri);
+    }
+  }
+
+  /**
    * Convert the playlist back to M3U8 string format
    * @returns M3U8 playlist string
    */
@@ -354,7 +401,7 @@ export class M3U8Editor {
       const params = [
         `BANDWIDTH=${stream.bandwidth}`,
         `AVERAGE-BANDWIDTH=${stream.averageBandwidth}`,
-        `CODECS=${stream.codecs}`
+        `CODECS="${stream.codecs}"`
       ];
       if (stream.resolution) {
         params.push(`RESOLUTION=${stream.resolution.width}x${stream.resolution.height}`);
