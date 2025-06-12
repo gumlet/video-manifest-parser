@@ -1,7 +1,8 @@
 {
-  "name": "manifest-editor",
+  "name": "video-manifest-parser",
   "version": "1.0.0",
   "description": "A TypeScript package for manipulating MPD and M3U8 manifests",
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
