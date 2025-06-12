@@ -121,17 +121,10 @@ export class MPDEditor {
 
   // Reset AdaptationSet IDs and Representation IDs
   private resetIds(): void {
-    const adaptationSets = this.mpd.Period.AdaptationSet;
-    const representations = adaptationSets.flatMap(set =>
-      Array.isArray(set.Representation) ? set.Representation : [set.Representation]
-    );
-    const ids = representations
-      .map(rep => rep && typeof rep['@id'] === 'string' ? parseInt(rep['@id']) : NaN)
-      .filter(id => !isNaN(id));
     this.mpd.Period.AdaptationSet.forEach((set, index) => {
       set['@id'] = index.toString();
     });
-    this.mpd.Period.AdaptationSet.forEach((set, index) => {
+    this.mpd.Period.AdaptationSet.forEach((set) => {
       const representations = Array.isArray(set.Representation) ? set.Representation : [set.Representation];
       representations.forEach((rep, repIndex) => {
         rep['@id'] = repIndex.toString();

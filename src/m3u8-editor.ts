@@ -58,6 +58,7 @@ interface UriList {
  */
 export class M3U8Editor {
   private parser: Parser;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private manifest: any;
   private manifestString: string;
   private mediaGroups: MediaGroups;
@@ -135,6 +136,11 @@ export class M3U8Editor {
     this.parser.push(m3u8String);
     this.manifestString = m3u8String;
     this.manifest = this.parser.manifest;
+
+    if (!this.manifest || !this.manifest.mediaGroups || !this.manifest.playlists) {
+      throw new Error('Invalid M3U8 manifest structure');
+    }
+
     this.mediaGroups = {
       audio: [],
       subtitles: [],
@@ -169,6 +175,7 @@ export class M3U8Editor {
       audio: this.mediaGroups.audio.map(media => media.uri),
       subtitles: this.mediaGroups.subtitles.map(media => media.uri),
       closedCaptions: this.mediaGroups.closedCaptions.map(media => media.uri),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       video: this.manifest.playlists.map((playlist: any) => playlist.uri),
       iframe: this.mediaGroups.iFrameStreams.map(stream => stream.uri)
     };
@@ -366,6 +373,7 @@ export class M3U8Editor {
     lines.push('\n');
 
     // Add stream inf
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.manifest.playlists.forEach((playlist: any) => {
       const params = [
         `BANDWIDTH=${playlist.attributes.BANDWIDTH}`,
@@ -381,10 +389,10 @@ export class M3U8Editor {
       if (playlist.attributes['VIDEO-RANGE']) {
         params.push(`VIDEO-RANGE=${playlist.attributes['VIDEO-RANGE']}`);
       }
-      if (playlist.attributes.AUDIO) {
+      if (playlist.attributes.AUDIO && this.mediaGroups.audio.length > 0) {
         params.push(`AUDIO="${playlist.attributes.AUDIO}"`);
       }
-      if (playlist.attributes.SUBTITLES) {
+      if (playlist.attributes.SUBTITLES && this.mediaGroups.subtitles.length > 0) {
         params.push(`SUBTITLES="${playlist.attributes.SUBTITLES}"`);
       }
       if (playlist.attributes['CLOSED-CAPTIONS']) {
