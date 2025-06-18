@@ -1,6 +1,6 @@
 {
   "name": "@gumlet/video-manifest-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A TypeScript package for manipulating MPD and M3U8 manifests",
   "license": "MIT",
   "main": "dist/index.js",
