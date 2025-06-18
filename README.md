@@ -15,7 +15,7 @@ A TypeScript library for manipulating MPD (MPEG-DASH) and M3U8 (HLS) manifest fi
 ## Installation
 
 ```bash
-npm install manifest-editor
+npm install @gumlet/video-manifest-parser
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ npm install manifest-editor
 ### MPD Editor
 
 ```typescript
-import { MPDEditor } from 'manifest-editor';
+import { MPDEditor } from '@gumlet/video-manifest-parser';
 
 // Parse MPD manifest
 const editor = new MPDEditor(mpdString);
@@ -49,7 +49,7 @@ const updatedMpd = editor.toString();
 ### M3U8 Editor
 
 ```typescript
-import { M3U8Editor } from 'manifest-editor';
+import { M3U8Editor } from '@gumlet/video-manifest-parser';
 
 // Parse M3U8 playlist
 const editor = new M3U8Editor(m3u8String);
@@ -126,39 +126,3 @@ interface Media {
 - `fast-xml-parser`: For parsing and building MPD XML
 - `m3u8-parser`: For parsing M3U8 playlists
 - `typescript`: For type definitions and compilation
-
-## Development
-
-To run tests and check coverage:
-
-```bash
-npm test
-npm run test:coverage
-```
-
-## Automated Versioning & Changelog
-
-This project uses [standard-version](https://github.com/conventional-changelog/standard-version) for automated versioning and changelog generation. To create a new release:
-
-```bash
-npm run release
-```
-
-This will:
-- Bump the version in `package.json` based on conventional commits
-- Update `CHANGELOG.md`
-- Create a new git tag
-
-After running the release command, push the changes and publish:
-
-```bash
-npm run postrelease
-```
-
-## Publishing
-
-Publishing is automated via GitHub Actions when you push a new tag (e.g., `v1.0.0`). Ensure your `NPM_TOKEN` is set in your repository secrets.
-
-## Commit Guidelines
-
-Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages to ensure correct versioning and changelog generation.
