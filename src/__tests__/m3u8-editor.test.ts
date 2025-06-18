@@ -1,4 +1,4 @@
-import { M3U8Editor } from '../m3u8-editor';
+import { M3U8Editor } from '../index';
 import fs from 'fs/promises';
 
 // Helper function to create a complete manifest with playlists

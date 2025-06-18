@@ -1,4 +1,4 @@
-import { MPDEditor } from '../mpd-editor';
+import { MPDEditor } from '../index';
 import fs from 'fs/promises';
 
 describe('MPDEditor', () => {
@@ -61,6 +61,30 @@ describe('MPDEditor', () => {
       editor.addSubtitleStream('fr', 1000, 60); // Example values: 1000 bytes VTT file, 60 seconds video
       const isValid = MPDEditor.validateRoundTrip(editor.toXML());
       expect(isValid).toBe(true);
+    });
+  });
+
+  describe('addAudioStream', () => {
+    it('should add an audio stream with correct properties', () => {
+      editor.addAudioStream('en', '128000', 'mp4a.40.2', '48000', 'audio/mp4');
+      const xml = editor.toXML();
+      expect(xml).toContain('<AdaptationSet');
+      expect(xml).toContain('contentType="audio"');
+      expect(xml).toContain('lang="en"');
+      expect(xml).toContain('bandwidth="128000"');
+      expect(xml).toContain('codecs="mp4a.40.2"');
+      expect(xml).toContain('mimeType="audio/mp4"');
+      expect(xml).toContain('audioSamplingRate="48000"');
+    });
+  });
+
+  describe('removeAudioStream', () => {
+    it('should remove an audio stream by language', () => {
+      editor.addAudioStream('en', '128000', 'mp4a.40.2', '48000', 'audio/mp4');
+      editor.removeAudioStream('en');
+      const xml = editor.toXML();
+      expect(xml).not.toContain('contentType="audio"');
+      expect(xml).not.toContain('lang="en"');
     });
   });
 });
