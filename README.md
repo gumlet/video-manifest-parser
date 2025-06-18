@@ -1,5 +1,4 @@
-[![Test Status](https://github.com/
-gumlet/video-manifest-parser/actions/workflows/test.yml/badge.svg)](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml)
+[![Test Status](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml/badge.svg)](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml)
 
 # Manifest Editor
 
