@@ -1,3 +1,5 @@
+[![Test Status](https://github.com/your-username/video-manifest-parser/actions/workflows/test.yml/badge.svg)](https://github.com/your-username/video-manifest-parser/actions/workflows/test.yml)
+
 # Manifest Editor
 
 A TypeScript library for manipulating MPD (MPEG-DASH) and M3U8 (HLS) manifest files.
@@ -133,3 +135,30 @@ To run tests and check coverage:
 npm test
 npm run test:coverage
 ```
+
+## Automated Versioning & Changelog
+
+This project uses [standard-version](https://github.com/conventional-changelog/standard-version) for automated versioning and changelog generation. To create a new release:
+
+```bash
+npm run release
+```
+
+This will:
+- Bump the version in `package.json` based on conventional commits
+- Update `CHANGELOG.md`
+- Create a new git tag
+
+After running the release command, push the changes and publish:
+
+```bash
+npm run postrelease
+```
+
+## Publishing
+
+Publishing is automated via GitHub Actions when you push a new tag (e.g., `v1.0.0`). Ensure your `NPM_TOKEN` is set in your repository secrets.
+
+## Commit Guidelines
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages to ensure correct versioning and changelog generation.

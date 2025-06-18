@@ -1,5 +1,5 @@
 {
-  "name": "video-manifest-parser",
+  "name": "@gumlet/video-manifest-parser",
   "version": "1.0.1",
   "description": "A TypeScript package for manipulating MPD and M3U8 manifests",
   "license": "MIT",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/video-manifest-parser.git"
+    "url": "https://github.com/gumlet/video-manifest-parser.git"
   },
   "keywords": [
     "mpd",
