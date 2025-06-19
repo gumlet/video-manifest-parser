@@ -87,4 +87,55 @@ describe('MPDEditor', () => {
       expect(xml).not.toContain('lang="en"');
     });
   });
+
+  describe('constructor edge cases', () => {
+    it('should handle empty AdaptationSet array', () => {
+      const minimalMpd = '<Period></Period>';
+      const minimalEditor = new MPDEditor(minimalMpd);
+      expect(minimalEditor.toXML()).toContain('<Period>');
+    });
+    it('should handle missing AdaptationSet', () => {
+      const noAdaptationSetMpd = '<Period></Period>';
+      const minimalEditor = new MPDEditor(noAdaptationSetMpd);
+      minimalEditor.addAudioStream('en', '64000', 'mp4a.40.2', '44100', 'audio/mp4');
+      expect(minimalEditor.toXML()).toContain('contentType="audio"');
+    });
+  });
+
+  describe('removeAudioStream edge cases', () => {
+    it('should do nothing if audio lang does not exist', () => {
+      const before = editor.toXML();
+      editor.removeAudioStream('nonexistent');
+      const after = editor.toXML();
+      expect(after).toEqual(before);
+    });
+  });
+
+  describe('removeSubtitleStream edge cases', () => {
+    it('should do nothing if subtitle lang does not exist', () => {
+      const before = editor.toXML();
+      editor.removeSubtitleStream('nonexistent');
+      const after = editor.toXML();
+      expect(after).toEqual(before);
+    });
+  });
+
+  describe('multiple audio and subtitle streams', () => {
+    it('should add and remove multiple audio and subtitle streams', () => {
+      editor.addAudioStream('en', '128000', 'mp4a.40.2', '48000', 'audio/mp4');
+      editor.addAudioStream('fr', '128000', 'mp4a.40.2', '48000', 'audio/mp4');
+      editor.addSubtitleStream('en', 1000, 60);
+      editor.addSubtitleStream('fr', 1000, 60);
+      let xml = editor.toXML();
+      expect(xml).toContain('lang="en"');
+      expect(xml).toContain('lang="fr"');
+      editor.removeAudioStream('en');
+      editor.removeSubtitleStream('fr');
+      xml = editor.toXML();
+      expect(xml).not.toContain('lang="en" contentType="audio"');
+      expect(xml).not.toContain('lang="fr" contentType="text"');
+      expect(xml).toContain('contentType="audio" lang="fr"');
+      expect(xml).toContain('contentType="text" lang="en"');
+    });
+  });
 });
