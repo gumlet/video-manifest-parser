@@ -1,13 +1,17 @@
 [![Test Status](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml/badge.svg)](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml)
 
+> **Note:** This package does not handle segmentation or encryption of media files like [Shaka Packager](https://github.com/shaka-project/shaka-packager). It is intended as a quick tool for editing manifests and removing already segmented streams. 
+>
+> It currently honors HLS and DASH specifications as followed by Shaka Packager.
+
 # Manifest Editor
 
-A TypeScript library for manipulating MPD (MPEG-DASH) and M3U8 (HLS) manifest files.
+A TypeScript library for manipulating MPD (MPEG-DASH) and M3U8 (HLS) manifest/master playlist files.
 
 ## Features
 
 - Parse and modify MPD (MPEG-DASH) manifests
-- Parse and modify M3U8 (HLS) playlists
+- Parse and modify M3U8 (HLS) master playlists
 - Support for multiple media types (video, audio, subtitles)
 - Automatic ID generation for new elements
 - Type-safe API with TypeScript interfaces
