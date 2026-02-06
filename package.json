@@ -18,6 +18,9 @@
     "fast-xml-parser": "^5.0.0",
     "m3u8-parser": "^1.1.0"
   },
+  "files": [
+    "dist/*"
+  ],
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
     "@types/jest": "^29.5.14",
