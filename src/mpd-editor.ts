@@ -29,7 +29,7 @@ export class MPDEditor {
   // Helper methods to get next sequential IDs
   private getNextAdaptationSetId(): string {
     const adaptationSets = this.mpd.Period.AdaptationSet;
-    const ids = adaptationSets.map(set => parseInt(set['@id'])).filter(id => !isNaN(id));
+    const ids = adaptationSets.map(set => parseInt(set['@id'], 10)).filter(id => !isNaN(id));
     return (ids.length > 0 ? Math.max(...ids) + 1 : 0).toString();
   }
 
@@ -39,7 +39,7 @@ export class MPDEditor {
       Array.isArray(set.Representation) ? set.Representation : [set.Representation]
     );
     const ids = representations
-      .map(rep => rep && typeof rep['@id'] === 'string' ? parseInt(rep['@id']) : NaN)
+      .map(rep => rep && typeof rep['@id'] === 'string' ? parseInt(rep['@id'], 10) : NaN)
       .filter(id => !isNaN(id));
     return (ids.length > 0 ? Math.max(...ids) + 1 : 0).toString();
   }
