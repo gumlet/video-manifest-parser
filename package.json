@@ -9,7 +9,7 @@
     "build": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint 'src/**/*.{ts,js}' --max-warnings=0",
+    "lint": "biome lint ./src",
     "prepublishOnly": "npm run build",
     "release": "standard-version",
     "postrelease": "git push --follow-tags origin main"
