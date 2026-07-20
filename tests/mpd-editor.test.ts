@@ -1,5 +1,6 @@
-import { MPDEditor } from '../index';
-import fs from 'fs/promises';
+import { MPDEditor } from '../src/index'
+import fs from 'fs/promises'
+import { describe, it, beforeAll, beforeEach, expect } from 'vitest';
 
 describe('MPDEditor', () => {
   let mpdString: string;
