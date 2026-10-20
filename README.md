@@ -1,4 +1,6 @@
 [![Test Status](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml/badge.svg)](https://github.com/gumlet/video-manifest-parser/actions/workflows/test.yml)
+[![npm version](https://img.shields.io/npm/v/@gumlet/video-manifest-parser.svg)](https://www.npmjs.com/package/@gumlet/video-manifest-parser)
+[![npm downloads](https://img.shields.io/npm/dm/@gumlet/video-manifest-parser.svg)](https://www.npmjs.com/package/@gumlet/video-manifest-parser)
 
 > **Note:** This package does not handle segmentation or encryption of media files like [Shaka Packager](https://github.com/shaka-project/shaka-packager). It is intended as a quick tool for editing manifests and removing already segmented streams. 
 >
